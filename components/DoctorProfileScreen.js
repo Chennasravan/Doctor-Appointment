@@ -6,6 +6,7 @@ const DoctorProfileScreen = ({ route }) => {
   const { doctor } = route.params;
   
   const handleAppointmentPress = () => {
+    
     // Navigate to the Appointment screen with doctor's data
     navigation.navigation('./AppointmentScreen', { doctor });
   };
