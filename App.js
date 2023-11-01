@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import LoginScreen from "./components/LoginScreen";
+import HomeScreen from "./components/HomeScreen";
+import DoctorProfileScreen from "./components/DoctorProfileScreen";
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ title: "Login" }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: "Home",
+            headerStyle: {
+              backgroundColor: "#f4511e",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+            gestureEnabled: true,
+            gestureDirection: "horizontal",
+            tabBarVisible: true,
+            tabBarLabel: "Home",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="home" color={color} size={size} />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="DoctorProfile"
+          component={DoctorProfileScreen}
+          options={{ title: "Doctor Profile" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
